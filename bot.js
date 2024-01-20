@@ -1,107 +1,9 @@
-// const Discord = require('discord.js');
-// const client = new Discord.Client({
-//   intents: [
-//     Discord.GatewayIntentBits.Guilds,
-//     Discord.GatewayIntentBits.GuildMessages,
-//     Discord.GatewayIntentBits.GuildVoiceStates,
-//     Discord.GatewayIntentBits.MessageContent
-//   ]
-// })
-
-// const prefix = '!'; // Botunuzun komutları dinlemesi için kullanacağı önek
-
-// const { DisTube } = require('distube');
-
-// client.distube = new DisTube(client, {
-//   leaveOnStop: false,
-//   emitNewSongOnly: true,
-//   emitAddSongWhenCreatingQueue: false,
-//   emitAddListWhenCreatingQueue: false,
-// });
-
-// client.on('ready', () => {
-//   console.log(`Bot olarak giriş yapıldı: ${client.user.tag}`);
-// });
-
-// client.on('messageCreate', (message) => {
-//   if (message.content === 'ping') {
-//     message.reply('pong!');
-//   }
-// });
-
-// client.on('messageCreate', async (message) => {
-//   if (!message.guild || message.author.bot) return;
-
-//   const args = message.content.slice(prefix.length).trim().split(/ +/);
-
-//   if (!message.content.toLowerCase().startsWith(prefix)) return;
-
-//   if (args.shift().toLowerCase() === ('play' || 'p')) {
-//     // Komut: !play <youtube-linki>
-//     client.distube.play(message.member.voice.channel, args.join  (' ')), {
-//       member: message.member,
-//       textChannel: message.channel,
-//       message
-//     }
-//   }
-
-// });
-
-// //ad a stop command
-
-// client.on('messageCreate', async (message) => {
-//   if (!message.guild || message.author.bot) return;
-
-//   const args = message.content.slice(prefix.length).trim().split(/ +/);
-
-//   if (!message.content.toLowerCase().startsWith(prefix)) return;
-
-//   if (args.shift().toLowerCase() === ('s')) {
-
-//     // Komut: !stop
-//     client.distube.stop(message.member.voice.channel);
-//   }
-// });
-
-
-// // add a skip command
-// client.on('messageCreate', async (message) => {
-//   if (!message.guild || message.author.bot) return;
-
-//   const args = message.content.slice(prefix.length).trim().split(/ +/);
-
-//   if (!message.content.toLowerCase().startsWith(prefix)) return;
-
-//   if (args.shift().toLowerCase() === 'skip') {
-//     // Komut: !skip
-//     client.distube.skip(message.member.voice.channel);
-//   }
-// });
-
-// // const status = queue =>
-// //   `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${
-// //     queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
-// //   }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
-// // client.distube
-// //   .on('playSong', (queue, song) =>{
-    
-// //     queue.textChannel.send(
-// //       `${client.emotes.play} | Çalan Şarkı \`${song.name}\` - \`${song.formattedDuration}\`\nÇalınmasını isteyen kişi: ${
-// //         song.user
-// //       }\n${status(queue)}`
-// //     )}
-// //   )
-
-// client.on('messageCreate', (message) => {
-//   if (message.content === 'ping') {
-//     message.reply('pong!');
-//   }
-// });
 const Discord = require('discord.js');
 const { REST } = require('discord.js');
 const { Routes } = require('discord-api-types/v9');
-const { MessageEmbed } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { TOKEN } = require('./token');
+
 
 const client = new Discord.Client({
   intents: [
@@ -130,7 +32,7 @@ client.on('ready', () => {
 
 
 (async () => {
-  const rest = new REST({ version: '9' }).setToken('MTExMTAzODM4OTQzMzY3MTgwMA.G1_OMu.xPaVKgFcmNyBp4LDOsI_VPaYnzvvwNU-_PeNKo');
+  const rest = new REST({ version: '9' }).setToken(TOKEN);
 
   try {
     console.log('Started refreshing application (/) commands.');
@@ -150,7 +52,7 @@ client.on('ready', () => {
 
 
 (async () => {
-  const rest = new REST({ version: '9' }).setToken('MTExMTAzODM4OTQzMzY3MTgwMA.G1_OMu.xPaVKgFcmNyBp4LDOsI_VPaYnzvvwNU-_PeNKo');
+  const rest = new REST({ version: '9' }).setToken(TOKEN);
 
   try {
     console.log('Started refreshing application (/) commands.');
@@ -255,4 +157,4 @@ client.distube
 });
 
 // Botunuzun token'ını buraya girin
-client.login('MTExMTAzODM4OTQzMzY3MTgwMA.G1_OMu.xPaVKgFcmNyBp4LDOsI_VPaYnzvvwNU-_PeNKo');
+client.login(TOKEN);
